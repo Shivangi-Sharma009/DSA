@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int n;
+int stack[100],top=-1;
+void push(int val){
+    if(top==n-1){
+        return;
+    }else{
+        stack[++top]=val; //we did it simultaneously just so that the size inc before we push elements
+        return;
+    }
+}
+
+void order(){
+    if(top==-1){
+        return;
+    }
+    else{
+        for(int i=0;i<=top;i++){
+            for(int j=i+1;j<=top;j++){
+                if(stack[i]<stack[j]){
+                    int temp;
+                    temp=stack[i];
+                    stack[i]=stack[j];
+                    stack[j]=temp;
+                }
+            }
+        }
+    }
+    for(int i=0;i<=top;i++){
+        printf("%d ", stack[i]);
+    }
+}
+
+
+int main() {
+    int val;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+    scanf("%d",&val);
+    push(val);
+}
+    push(val);
+    order();
+    return 0;
+}
