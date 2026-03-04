@@ -33,9 +33,7 @@ int peek(){
         return -1;
     }
     else{
-        int val =stack[top];
-        top--;
-        return val;
+        return stack[top];
     }
 }
 void show(){
@@ -52,10 +50,10 @@ int main(){
     int choice,val,res;
     while(1){
         printf("1. Push\n");
-        printf("1. Pop\n");
-        printf("1. Peek\n");
-        printf("1. Display\n");
-        printf("1. EXIT\n");
+        printf("2. Pop\n");
+        printf("3. Peek\n");
+        printf("4. Display\n");
+        printf("5. EXIT\n");
         printf("Enter Choice: ");
         scanf("%d", &choice);
         switch(choice){
@@ -72,7 +70,7 @@ int main(){
              case 3:
              res=peek();
              if(res!=-1)
-             printf("\n%d available at top of stack\n");
+             printf("\n%d available at top of stack\n",res);
             break;
              case 4:
              show();
