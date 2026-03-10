@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#define MAX 100
+char stack[101];
+int top=-1;
+int push(char val){
+    if(top==MAX-1){
+        return -1;
+    }else{
+        stack[++top]=val;
+        return val;
+    }
+}
+void pop(){
+    if(top==-1){
+        return;
+    }else{
+        top--;
+    }
+}
+int main() {  
+    char s[101];
+    scanf("%s", s);
+    for(int i=0;s[i]!='\0';i++){
+        if(s[i]=='*'){
+            pop();
+        }else{
+            push(s[i]);
+        }
+    }
+   for(int i = 0; i <= top; i++){
+    printf("%c", stack[i]);
+}
+    return 0;
+}
