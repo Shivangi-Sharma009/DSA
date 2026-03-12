@@ -1,146 +1,79 @@
 #include <stdio.h>
 #include <string.h>
-
-int N1, N2;
-int stack1[1000], stack2[1000];
-int top1 = -1, top2 = -1;
-
-void push1(int x){
-    if(top1 == N1 - 1){
+#include <math.h>
+#include <stdlib.h>
+int N1,N2;
+int stack1[1000],stack2[1000], top1=-1,top2=-1;
+void push(int stack[],int *top,int val,int N){
+    if(*top==N-1){
         printf("Overflow\n");
-        return;
+    }else{
+        stack[++(*top)]=val;
     }
-    stack1[++top1] = x;
 }
-
-void push2(int x){
-    if(top2 == N2 - 1){
-        printf("Overflow\n");
-        return;
-    }
-    stack2[++top2] = x;
-}
-
-void pop1(){
-    if(top1 == -1){
+void pop(int stack[],int *top){
+    if(*top==-1){
         printf("Underflow\n");
-        return;
+    }else{
+       printf("%d\n",stack[*top]);
+        (*top)--;
     }
-    printf("%d\n", stack1[top1--]);
 }
-
-void pop2(){
-    if(top2 == -1){
+void peek(int stack[],int *top){
+    if(*top==-1){
         printf("Underflow\n");
-        return;
+    }else{
+       printf("%d\n",stack[*top]);
     }
-    printf("%d\n", stack2[top2--]);
 }
-
-void peek1(){
-    if(top1 == -1){
-        printf("Underflow\n");
-        return;
-    }
-    printf("%d\n", stack1[top1]);
-}
-
-void peek2(){
-    if(top2 == -1){
-        printf("Underflow\n");
-        return;
-    }
-    printf("%d\n", stack2[top2]);
-}
-
-void display1(){
-    if(top1 == -1){
+void display(int stack[],int *top){
+    if(*top==-1){
         printf("Empty\n");
-        return;
+    }else{
+       for(int i=*top;i>=0;i--){
+           printf("%d ",stack[i]);
+       }
+        printf("\n");
     }
-    for(int i = top1; i >= 0; i--){
-        printf("%d ", stack1[i]);
-    }
-    printf("\n");
 }
-
-void display2(){
-    if(top2 == -1){
-        printf("Empty\n");
-        return;
+int main() {
+    scanf("%d %d",&N1,&N2);
+    int Q,stack,val;
+    scanf("%d",&Q);
+    char str[30];
+    for(int i=0;i<Q;i++){
+        scanf("%s",str);
+        if(strcmp(str,"PUSH")==0){
+            scanf("%d",&stack);
+            scanf("%d",&val);
+            if(stack==1){
+                push(stack1,&top1,val,N1);
+            }else{
+                 push(stack2,&top2,val,N2);
+            }
+        }else if(strcmp(str,"POP")==0){
+            scanf("%d",&stack);
+                if(stack==1){
+                    pop(stack1, &top1);
+                }else{
+                    pop(stack2, &top2);
+                }
+        }else if(strcmp(str,"PEEK")==0){
+            scanf("%d",&stack);
+                if(stack==1){
+                    peek(stack1, &top1);
+                }else{
+                    peek(stack2, &top2);
+                }
+        }else if(strcmp(str,"DISPLAY")==0){
+            scanf("%d",&stack);
+                if(stack==1){
+                    display(stack1, &top1);
+                }else{
+                    display(stack2, &top2);
+                }
+            }
     }
-    for(int i = top2; i >= 0; i--){
-        printf("%d ", stack2[i]);
-    }
-    printf("\n");
-}
-
-int main(){
-
-    scanf("%d %d", &N1, &N2);
-
-    int Q;
-    scanf("%d", &Q);
-
-    for(int i = 0; i < Q; i++){
-
-        char op[10];
-        scanf("%s", op);
-
-        int S, X;
-
-        if(strcmp(op,"PUSH") == 0){
-
-            scanf("%d %d", &S, &X);
-
-            if(S == 1){
-                push1(X);
-            }
-            else{
-                push2(X);
-            }
-
-        }
-
-        else if(strcmp(op,"POP") == 0){
-
-            scanf("%d", &S);
-
-            if(S == 1){
-                pop1();
-            }
-            else{
-                pop2();
-            }
-
-        }
-
-        else if(strcmp(op,"PEEK") == 0){
-
-            scanf("%d", &S);
-
-            if(S == 1){
-                peek1();
-            }
-            else{
-                peek2();
-            }
-
-        }
-
-        else if(strcmp(op,"DISPLAY") == 0){
-
-            scanf("%d", &S);
-
-            if(S == 1){
-                display1();
-            }
-            else{
-                display2();
-            }
-
-        }
-    }
-
+    
     return 0;
 }
